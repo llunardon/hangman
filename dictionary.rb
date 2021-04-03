@@ -10,5 +10,25 @@ module Dictionary
 
     chosen_word
   end
-end
 
+  def self.get_indexes(word, letter)
+    ret_indexes = []
+    chars = word.split('')
+
+    chars.each_with_index do |element, index|
+      if element == letter
+        ret_indexes.push(index)
+      end
+    end
+
+    ret_indexes
+  end
+
+  def self.subsitute_letters(word, letter, indexes)
+    indexes.each do |index|
+      word[index] = letter
+    end
+
+    word
+  end
+end
