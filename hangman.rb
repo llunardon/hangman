@@ -12,24 +12,31 @@ class Game
     @wrong_guesses = []
   end
 
-  def play_round()
+  def play_round(game)
     puts 'Your guess: ' + @guess
 
     if @wrong_guesses.any?
       puts 'Wrong characters: ' + @wrong_guesses.join(', ')
     end
 
-    puts ''
-    puts 'Enter a character: '
-    character = gets.chomp.downcase
+    puts "\nEnter a character, or type \'save\' if you want to save the game:"
+    input = gets.chomp.downcase
 
-    indexes = Dictionary.get_indexes(@word, character)
-    if indexes.length == 0 
-      Game.wrong_guess(@word, @wrong_guesses, character)
+    if input.length == 1
+      indexes = Dictionary.get_indexes(@word, input)
+      if indexes.length == 0 
+        Game.wrong_guess(@word, @wrong_guesses, input)
+      else
+        puts 'Correct guess!'
+        Dictionary.subsitute_letters(@guess, input, indexes)
+        Game.check_if_win(@guess, @word)
+      end
+    elsif input == 'save'
+      Game.save_game(game)
+      puts 'The game has been saved! Exiting the program...'
+      exit
     else
-      puts 'Correct guess!'
-      Dictionary.subsitute_letters(@guess, character, indexes)
-      Game.check_if_win(@guess, @word)
+      puts 'Invalid input!'
     end
   end
 

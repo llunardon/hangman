@@ -1,0 +1,6 @@
+--- !ruby/object:Game
+word: nisan
+guess: ___a_
+wrong_guesses:
+- l
+- b
