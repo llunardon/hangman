@@ -15,7 +15,7 @@ class Game
   def play_round(game)
     puts 'Your guess: ' + @guess
 
-    if @wrong_guesses.any?
+    if @wrong_guesses.any?  #print wrong characters
       puts 'Wrong characters: ' + @wrong_guesses.join(', ')
     end
 
